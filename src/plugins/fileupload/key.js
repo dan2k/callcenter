@@ -1,0 +1,1 @@
+export const MY_FILEUPLOAD_KEY = Symbol('MY_FILEUPLOAD_KEY')
