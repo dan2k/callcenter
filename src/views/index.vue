@@ -20,7 +20,7 @@
       </div>
     </div>
     <div class="col-12 col-md-4">
-      <div class="alert alert-secondary border border-secondary border-2 rounded-pill px-4 text-center" role="alert"  @click="$router.replace({path:'/manual'})">
+      <div class="alert alert-secondary border border-secondary border-2 rounded-pill px-4 text-center" role="alert"  @click="open">
         คู่มือการใช้งาน
         <span class="float-end"><i class="fas fa-book-open"></i></span>
       </div>
@@ -43,5 +43,7 @@
     }
 </style>
 <script setup>
-
+  const open=()=>{
+    window.open('https://www.controldata.co.th/mpsicc/callcenter/call_center_for_USER.pdf')
+  }
 </script>
