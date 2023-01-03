@@ -16,7 +16,8 @@
                 </div>
                 <div class="row">
                     <div class="row mx-2 sub-detail">
-                            <div class="mb-1 col-12">สถานที่: {{detail.cust_pdesc}}</div>
+                            <div class="mb-1 col-12 col-sm-6 col-md-6">สถานที่: {{detail.cust_pdesc}}</div>
+                            <div class="mb-1 col-12 col-sm-6 col-md-6">กลุ่มลูกค้า: {{detail.cust_user}}</div>
                             <div class="mb-1 col-12 col-sm-6 col-md-6 ">ผู้แจ้ง: {{detail.job_add_user}} </div>
                             <div class="mb-1 col-12 col-sm-6 col-md-6 ">วันเวลา: {{ detail.job_add_datetime}} </div>
                             <!-- <div class="mb-1 col-12 col-sm-6 col-md-6 ">เบอร์โทร: <a :href="`tel:${detail.job_phone}`">{{ detail.job_phone }}</a></div> -->
