@@ -21,8 +21,8 @@
                             <div class="mb-1 col-12 col-sm-6 col-md-6 ">ผู้แจ้ง: {{detail.job_add_user}} </div>
                             <div class="mb-1 col-12 col-sm-6 col-md-6 ">วันเวลา: {{ detail.job_add_datetime}} </div>
                             <!-- <div class="mb-1 col-12 col-sm-6 col-md-6 ">เบอร์โทร: <a :href="`tel:${detail.job_phone}`">{{ detail.job_phone }}</a></div> -->
-                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">ผู้รับผิดชอบ: {{detail.job_add_user}} </div>
-                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">วันเวลา: {{ detail.job_add_datetime}} </div>
+                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">ผู้รับผิดชอบ: {{detail.rec_name}} </div>
+                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">วันเวลา: {{ detail.job_receive_datetime}} </div>
                             <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">เบอร์โทรผู้รับผิดชอบ: <span v-for="t in detail.rec_phone?.split('|')"><a   :href="`tel:${t}`">{{ t }}</a>&nbsp;</span></div>
                         </div>
                 </div>
