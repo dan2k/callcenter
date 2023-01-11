@@ -36,7 +36,7 @@
                 <div v-if="detail.job_status==1" class="row mx-2">
                     <div class="col-12">
                         <h6 class="card-title">การแก้ไข:</h6>
-                        <p class="sub-detail" style="text-indent: 1.5em;" >{{solve.comment_desc}}</p>
+                        <p class="sub-detail" style="text-indent: 1.5em;" >{{solve?.comment_desc}}</p>
                     </div>
                     
                 </div>
