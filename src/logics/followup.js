@@ -52,7 +52,7 @@ export const useFollowup=()=>{
     const getJobs=async ()=>{
         start()
         try{
-            let rs =await api.get(`callcenter/job/v1/getJobs/${store.userData.ses_custptype}/${store.userData.ses_custpcode}`)
+            let rs =await api.get(`callcenter/job/v2/getJobs/${store.userData.ses_custptype}/${store.userData.ses_custpcode}/${store.userData.ses_user}`)
             jobs.value=rs.data.data
         }catch(err){
             errAlert(err)
