@@ -82,6 +82,16 @@ export const useFollowup=()=>{
             }
             close()
     };
+    const getSubject = async () => {
+        start()
+        try {
+          let rs = await api.get(`callcenter/job/v2/getSubject`);
+          return rs.data.data;
+        } catch (err) {
+          errAlert(err);
+        }
+        close()
+      };
     return {
         detail,
         jobs,
@@ -93,5 +103,6 @@ export const useFollowup=()=>{
         getJobs,
         savePic,
         getPic,
+        getSubject,
     }
 }

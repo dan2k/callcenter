@@ -63,6 +63,12 @@
                     
                 </div>
                 <br/>
+                <button 
+                    v-if="detail.satisfy1<1" 
+                    @click="$router.replace({ path: `/followup/${$route.params.jobid}/satisfy` })"
+                    class="btn btn-primary btn-sm"
+                >ประเมินความพึงพอใจ
+                </button>
                 <a class="card-link float-end" style="cursor:pointer" @click="$router.replace({path:'/followup'})">ย้อนกลับ</a>
             </div>
         </div>

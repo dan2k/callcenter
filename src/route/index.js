@@ -54,6 +54,11 @@ const routes = [
 						name:'followup-detail',
 						component: ()=>import("@/views/followup/followup-detail.vue"),
 					},
+					{
+						path: ':jobid/satisfy',
+						name:'followup-satisfy',
+						component: ()=>import("@/views/followup/followup-satisfy.vue"),
+					},
 				],
 			},
 			{
