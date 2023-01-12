@@ -64,7 +64,7 @@
                 </div>
                 <br/>
                 <button 
-                    v-if="detail.satisfy1<1" 
+                    v-if="detail.satisfy1<1 && detail.job_status==1" 
                     @click="$router.replace({ path: `/followup/${$route.params.jobid}/satisfy` })"
                     class="btn btn-primary btn-sm"
                 >ประเมินความพึงพอใจ
