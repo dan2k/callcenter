@@ -19,13 +19,15 @@ export const useFollowup=()=>{
             let rs=await api.get(`callcenter/job/v1/getJobDetail/${jobid}`)
             detail.value=rs.data.data[0]
             pics.value=await getPic(jobid)
+            close()
             if(detail.value.job_status==1){
                 await getSolve(jobid)
             }
         }catch(err){
             errAlert(err)
+            close()
         }
-        close()
+        
     }
     const getPic=async (jobid)=>{
         start()
@@ -35,29 +37,32 @@ export const useFollowup=()=>{
             return rs.data.data
         }catch(err){
             errAlert(err)
+            close()
         }
-        close()
     }
 
     const getSolve=async (jobid)=>{
         start()
         try{
             let rs=await api.get(`callcenter/job/v1/getSolve/${jobid}`)
+            close()
             solve.value=rs.data.data[0]
         }catch(err){
             errAlert(err)
+            close()
         }
-        close()
     }
     const getJobs=async ()=>{
         start()
         try{
             let rs =await api.get(`callcenter/job/v2/getJobs/${store.userData.ses_custptype}/${store.userData.ses_custpcode}/${store.userData.ses_user}`)
             jobs.value=rs.data.data
+            close()
         }catch(err){
             errAlert(err)
+            close()
         }
-        close()
+        
     }
     const showDetail=(jobid)=>{
         router.replace({path:`/followup/${jobid}`})
@@ -76,21 +81,24 @@ export const useFollowup=()=>{
                     "Content-Type": "multipart/form-data",
                     },
                 });
+                close()
                 
             }catch(err){
                 errAlert(err)
+                close()
             }
-            close()
+            
     };
     const getSubject = async () => {
         start()
         try {
           let rs = await api.get(`callcenter/job/v2/getSubject`);
+          close()
           return rs.data.data;
         } catch (err) {
           errAlert(err);
+          close()
         }
-        close()
       };
     return {
         detail,
