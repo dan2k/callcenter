@@ -96,13 +96,16 @@ const submit=async ()=>{
       subject: subject.value,
       jobid: route.params.jobid,
     });
+    close()
     okAlert(rs.data.msg, () => {
       router.replace({ path: `/followup/${route.params.jobid}` });
     });
+
   } catch (err) {
     errAlert(err);
+    close()
   }
-  close()
+  
 }
 </script>
 <style scoped>
