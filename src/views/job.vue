@@ -75,7 +75,7 @@
                 ><i class="fas fa-camera"></i></span
                 
             ></label> -->
-            <button class="btn btn-outline-danger w-25" @click="addImage()"><i class="fas fa-camera"></i><br/><span style="font-size:10px;">เพิ่มรูปภาพ</span></button>
+            <button type="button" class="btn btn-outline-danger w-25" @click="addImage()"><i class="fas fa-camera"></i><br/><span style="font-size:10px;">เพิ่มรูปภาพ</span></button>
           </template>
         </Upload>
       </div>

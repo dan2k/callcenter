@@ -16,14 +16,19 @@
                 </div>
                 <div class="row">
                     <div class="row mx-2 sub-detail">
-                            <div class="mb-1 col-12 col-sm-6 col-md-6">สถานที่: {{detail.cust_pdesc}}</div>
-                            <div class="mb-1 col-12 col-sm-6 col-md-6">กลุ่มลูกค้า: {{detail.cust_user}}</div>
-                            <div class="mb-1 col-12 col-sm-6 col-md-6 ">ผู้แจ้ง: {{detail.job_add_user}} </div>
-                            <div class="mb-1 col-12 col-sm-6 col-md-6 ">วันเวลา: {{ detail.job_add_datetime}} </div>
+                            <div class="mb-1 col-12 col-sm-6 col-md-6"><b>สถานที่:</b> {{detail.cust_pdesc}}</div>
+                            <div class="mb-1 col-12 col-sm-6 col-md-6"><b>กลุ่มลูกค้า:</b> {{detail.cust_user}}</div>
+                            <div class="mb-1 col-12 col-sm-6 col-md-6 "><b>ผู้แจ้ง:</b> {{detail.job_add_user}} </div>
+                            <div class="mb-1 col-12 col-sm-6 col-md-6 "><b>วันเวลา:</b> {{ detail.job_add_datetime}} </div>
+                            <div v-if="detail.group_desc" class="mb-1 col-12 col-sm-6 col-md-6 "><b>ระบบงาน:</b> {{ detail.group_desc}} </div>
+                            <div v-if="detail.sub1_desc" class="mb-1 col-12 col-sm-6 col-md-6 "><b>โปรแกรม:</b> {{ detail.sub1_desc}} </div>
+                            <div v-if="detail.sub2_desc" class="mb-1 col-12 col-sm-6 col-md-6 "><b>เมนู:</b> {{ detail.sub2_desc}} </div>
+                            <div v-if="detail.sub3_desc" class="mb-1 col-12 col-sm-6 col-md-6 "><b>เมนูย่อย:</b> {{ detail.sub3_desc}} </div>
+
                             <!-- <div class="mb-1 col-12 col-sm-6 col-md-6 ">เบอร์โทร: <a :href="`tel:${detail.job_phone}`">{{ detail.job_phone }}</a></div> -->
-                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">ผู้รับผิดชอบ: {{detail.rec_name}} </div>
-                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">วันเวลา: {{ detail.job_receive_datetime}} </div>
-                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 ">เบอร์โทรผู้รับผิดชอบ: <span v-for="t in detail.rec_phone?.split('|')"><a   :href="`tel:${t}`">{{ t }}</a>&nbsp;</span></div>
+                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 "><b>ผู้รับผิดชอบ:</b> {{detail.rec_name}} </div>
+                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 "><b>วันเวลา:</b> {{ detail.job_receive_datetime}} </div>
+                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 "><b>เบอร์โทรผู้รับผิดชอบ:</b> <span v-for="t in detail.rec_phone?.split('|')"><a   :href="`tel:${t}`">{{ t }}</a>&nbsp;</span></div>
                         </div>
                 </div>
                 <div class="row mx-2">
@@ -63,6 +68,12 @@
                     
                 </div>
                 <br/>
+                <button 
+                    v-if="detail.satisfy1<1 && detail.job_status==1" 
+                    @click="$router.replace({ path: `/followup/${$route.params.jobid}/satisfy` })"
+                    class="btn btn-primary btn-sm"
+                >ประเมินความพึงพอใจ
+                </button>
                 <a class="card-link float-end" style="cursor:pointer" @click="$router.replace({path:'/followup'})">ย้อนกลับ</a>
             </div>
         </div>
