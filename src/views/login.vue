@@ -3,7 +3,7 @@
    centred
 </div> -->
   <div class="gimage position-absolute">
-    <img  class="logo"  src="/CDG.jpg" alt="">
+    <img  class="logo"  src="/CDG.png" alt="">
     <img  class="kiss"  src="@/assets/images/cc/kisspng.png">
     <img  class="kiss2"  src="@/assets/images/cc/kisspng2.png">
     <img  class="kiss3"  src="@/assets/images/cc/kisspng2.png">
@@ -83,12 +83,12 @@ label {
   overflow: hidden;
 }
 .logo {
-  width: 10%;
+  width: 50vw;
   height: auto;
   z-index:1000;
   position: absolute;
-  top:5% ;
-  right:8%;
+  top:-12vw ;
+  right:-10vw;
   
 }
 .kiss {
@@ -119,12 +119,12 @@ label {
 }
 @media screen and (max-width: 767px) {
   .logo {
-  width: 10%;
+  width: 50%;
   height: auto;
   z-index:1000;
   position: absolute;
-  top:1.8% ;
-  right:3%;
+  top:-5% ;
+  right:-10%;
   
 }
 .kiss {
