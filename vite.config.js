@@ -23,6 +23,11 @@ export default defineConfig(async ({ command, mode }) => {
           changeOrigin: true,
           rewrite: (path) => path.replace(/^\/api/, '')
         },
+        '/icc': {
+          target: env.VITE_PRIVATE_API_ICC_URL,
+          changeOrigin: true,
+          rewrite: (path) => path.replace(/^\/icc/, '')
+        },
       },
     },
     build:{
