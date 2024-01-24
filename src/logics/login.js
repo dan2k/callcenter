@@ -12,6 +12,7 @@ export const useLogin=()=>{
     const provinces=ref([])
     const store=useAuthStore()
     const isEdit=ref(false)
+    const isHw=ref(false)
     const login= async ()=>{
         if(username.value.trim().length<1){
             errAlert('กรุณาระบุชื่อใช้งาน')
@@ -26,7 +27,7 @@ export const useLogin=()=>{
                 return 
             }
             
-            
+            isHw.value=rs.data.isHw
             if(rs.data.isOne){
               custpcodes.value=rs.data.data.map((ob,i)=>{
                   return {id:`${ob.cust_ptype}|${ob.cust_pcode}`,text:`${ob.cust_pcode}:${ob.cust_pdesc}`}
@@ -59,7 +60,7 @@ export const useLogin=()=>{
         let {id,text}=custpcode.value
         let tmp=id.split('|')
         let tmp2=text.split(':')
-        store.setLogin(tmp[0],tmp[1],tmp2[1],username.value)
+        store.setLogin(tmp[0],tmp[1],tmp2[1],username.value,isHw.value)
       }
       const setPcode=async (opt,index)=>{
         if(opt){

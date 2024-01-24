@@ -10,7 +10,25 @@
   <hr />
   <div class="card col-xs-12 col-sm-6 col-md-6 mb-3 mx-auto">
     <form ref="form" @submit.prevent="login" class="needs-validation" novalidate>
-      <div class="card-body">
+      <div class="card-body" >
+        <div class="mb-2" v-if="isHw==1">
+          <label for="detail" class="form-label">ประเภทปัญหา</label>
+          <select class="form-control form-control-sm"  
+            v-model="state.job_type"
+            @change="handleBlur('job_type')"
+            :class="{
+              'is-valid': !v$.job_type.$error && v$.job_type.$dirty,
+              'is-invalid': v$.job_type.$error,
+            }"
+          >
+            <option value="">-- เลือกประเภทปัญหา --</option>
+            <option value="1">ปัญหาด้านอุปกรณ์</option>
+            <option value="2">ปัญหาด้านโปรแกรม</option>
+          </select>
+          <div id="validationServer03Feedback" class="invalid-feedback">
+            {{ v$.job_type.$errors[0]?.$message }}
+          </div>
+        </div>
         <div class="mb-2">
           <label for="detail" class="form-label">รายละเอียด</label>
           <textarea
@@ -103,6 +121,7 @@
         </div>
       </div>
     </form>
+    
   </div>
 </template>
 <style scoped>
@@ -118,7 +137,7 @@ label {
 import { useJob } from "@/logics/job";
 // import { onMounted, ref } from "vue";
 // const uf=ref()
-const { state, rawtel, form, v$, login, reset, handleBlur } = useJob();
+const { state, isHw,rawtel, form, v$, login, reset, handleBlur } = useJob();
 // onMounted(()=>{
 //   console.log(uf.value.files)
 // })

@@ -34,10 +34,11 @@ export const useAuthStore = defineStore('auth-store',  {
       }
       close()
     },
-    async setLogin(custptype,custpcode,custpdesc,user){
+    async setLogin(custptype,custpcode,custpdesc,user,isHw){
       start()
       try{
-        let res=await api.post(`callcenter/auth/v1/setLogin/${custptype}/${custpcode}/${user}`)
+        isHw=isHw?1:0
+        let res=await api.post(`callcenter/auth/v2/setLogin/${custptype}/${custpcode}/${user}/${isHw}`)
         await this.checkLogin()
         if(this.isLogin){
           this.custpdesc=custpdesc

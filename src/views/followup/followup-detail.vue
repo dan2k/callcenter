@@ -28,7 +28,7 @@
                             <!-- <div class="mb-1 col-12 col-sm-6 col-md-6 ">เบอร์โทร: <a :href="`tel:${detail.job_phone}`">{{ detail.job_phone }}</a></div> -->
                             <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 "><b>ผู้รับผิดชอบ:</b> {{detail.rec_name}} </div>
                             <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 "><b>วันเวลา:</b> {{ detail.job_receive_datetime}} </div>
-                            <div v-if="detail.job_status!=99" class="mb-1 col-12 col-sm-6 col-md-6 "><b>เบอร์โทรผู้รับผิดชอบ:</b> <span v-for="t in detail.rec_phone?.split('|')"><a   :href="`tel:${t}`">{{ t }}</a>&nbsp;</span></div>
+                            <div v-if="detail.job_status!=99 && detail.rec_phone" class="mb-1 col-12 col-sm-6 col-md-6 "><b>เบอร์โทรผู้รับผิดชอบ:</b> <span v-for="t in detail.rec_phone?.split('|')"><a   :href="`tel:${t}`">{{ t }}</a>&nbsp;</span></div>
                         </div>
                 </div>
                 <div class="row mx-2">
@@ -63,13 +63,18 @@
                 <div v-if="detail.job_status==1" class="row mx-2">
                     <div class="col-12">
                         <h6 class="card-title">การแก้ไข:</h6>
-                        <p style="text-indent: 1.5em;" class="sub-detail">{{solve.comment_desc}}</p>
+                        <p v-if="solve.job_type=='SW'" style="text-indent: 1.5em;" class="sub-detail">{{solve?.comment_desc}}</p>
+                        <p v-if="solve.job_type=='HW'" style="text-indent: 1.5em;" class="sub-detail">
+                            1.ทำการตรวจสอบ {{ solve.comment_desc.split('||')[0] }}<br>
+                            2.ดำเนินการ {{ solve.comment_desc.split('||')[1] }}<br>
+                            3.ทำการทดสอบ {{ solve.comment_desc.split('||')[2] }}<br>
+                        </p>
                     </div>
                     
                 </div>
                 <br/>
                 <button 
-                    v-if="detail.satisfy1<1 && detail.job_status==1" 
+                    v-if="detail.satisfy1<1 && detail.job_status==1 && solve.job_type=='SW'" 
                     @click="$router.replace({ path: `/followup/${$route.params.jobid}/satisfy` })"
                     class="btn btn-primary btn-sm"
                 >ประเมินความพึงพอใจ
@@ -77,6 +82,7 @@
                 <a class="card-link float-end" style="cursor:pointer" @click="$router.replace({path:'/followup'})">ย้อนกลับ</a>
             </div>
         </div>
+        
     </div>
 </template>
 <style scoped>
@@ -93,8 +99,9 @@
     import { onMounted } from 'vue';
     const route=useRoute()
     const {detail,getDetail,solve,pics,files,savePic,getPic}=useFollowup()
-    onMounted(()=>{
-        getDetail(route.params.jobid)
+    onMounted(async ()=>{
+        await getDetail(route.params.jobid)
+        console.log(detail)
     })
     const save=async ()=>{
         await savePic(route.params.jobid)
