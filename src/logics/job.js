@@ -91,7 +91,7 @@ export const useJob=()=>{
                 });
                 // console.log(rs)
                 //เพิ่มเติมไปเปิดใน sv_service ด้วย 
-                if(state.job_type!=2){
+                if(state.job_type==1){
                     let userData=rs.data.userData 
                     if(userData.length<1){
                         throw new Error('ไม่พบ user กลางของหน่วยงานนี้จึงไม่สามารถเปิดปัญหาในส่วนของ  sv_service ได้');
