@@ -63,8 +63,8 @@
                 <div v-if="detail.job_status==1" class="row mx-2">
                     <div class="col-12">
                         <h6 class="card-title">การแก้ไข:</h6>
-                        <p v-if="solve.job_type=='SW'" style="text-indent: 1.5em;" class="sub-detail">{{solve?.comment_desc}}</p>
-                        <p v-if="solve.job_type=='HW'" style="text-indent: 1.5em;" class="sub-detail">
+                        <pre v-if="job_type=='SW'" style="text-indent: 1.5em;" class="sub-detail">{{solve?.comment_desc}}</pre>
+                        <p v-if="job_type=='HW'" style="text-indent: 1.5em;" class="sub-detail">
                             1.ทำการตรวจสอบ {{ solve.comment_desc.split('||')[0] }}<br>
                             2.ดำเนินการ {{ solve.comment_desc.split('||')[1] }}<br>
                             3.ทำการทดสอบ {{ solve.comment_desc.split('||')[2] }}<br>
@@ -98,7 +98,7 @@
     import { useFollowup } from '@/logics/followup';
     import { onMounted } from 'vue';
     const route=useRoute()
-    const {detail,getDetail,solve,pics,files,savePic,getPic}=useFollowup()
+    const {detail,getDetail,solve,job_type,pics,files,savePic,getPic}=useFollowup()
     onMounted(async ()=>{
         await getDetail(route.params.jobid)
         console.log(detail)

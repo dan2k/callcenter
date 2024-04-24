@@ -41,8 +41,8 @@
                 <div v-if="detail.job_status==1" class="row mx-2">
                     <div class="col-12">
                         <h6 class="card-title">การแก้ไข:</h6>
-                        <p v-if="solve.job_type=='SW'" style="text-indent: 1.5em;" class="sub-detail">{{solve?.comment_desc}}</p>
-                        <p v-if="solve.job_type=='HW'" style="text-indent: 1.5em;" class="sub-detail">
+                        <pre v-if="job_type=='SW'" style="text-indent: 1.5em;" class="sub-detail">{{solve?.comment_desc}}</pre>
+                        <p v-if="job_type=='HW'" style="text-indent: 1.5em;" class="sub-detail">
                             1.ทำการตรวจสอบ {{ solve.comment_desc.split('||')[0] }}<br>
                             2.ดำเนินการ {{ solve.comment_desc.split('||')[1] }}<br>
                             3.ทำการทดสอบ {{ solve.comment_desc.split('||')[2] }}<br>
@@ -67,7 +67,7 @@
 <script setup>
     import { useSearch} from "@/logics/search"
     import { onMounted } from 'vue';
-    const {detail,getDetail,solve} = useSearch()
+    const {detail,getDetail,solve,job_type} = useSearch()
     onMounted(()=>{
         getDetail()
     })

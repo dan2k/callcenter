@@ -15,6 +15,7 @@ export const useSearch=()=>{
     const isFinish=ref(true)  
     const detail=ref({}) 
     const solve=ref(null) 
+    const job_type=ref('');
     const doSearch = async (key='') => {
         if(key.length<1){
           jobs.value.length=0
@@ -75,6 +76,7 @@ export const useSearch=()=>{
         try{
             let rs=await api.get(`callcenter/job/v1/getSolve/${jobid}`)
             solve.value=rs.data.data[0]
+            job_type.value=rs.data.job_type
         }catch(err){
             errAlert(err)
         }
@@ -87,6 +89,7 @@ export const useSearch=()=>{
         isFinish,
         detail,
         solve,
+        job_type,
         showDetail,
         more,
         checkQuery,
