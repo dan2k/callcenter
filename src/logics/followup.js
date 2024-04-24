@@ -11,6 +11,7 @@ export const useFollowup=()=>{
     const jobs =ref([])
     const pics=ref([])
     const solve=ref(null)
+    const job_type=ref('');
     const {files}=useUpload()
     files.value.length=0
     const getDetail=async (jobid)=>{
@@ -47,6 +48,7 @@ export const useFollowup=()=>{
             let rs=await api.get(`callcenter/job/v1/getSolve/${jobid}`)
             close()
             solve.value=rs.data.data[0]
+            job_type.value=rs.data.job_type;
         }catch(err){
             errAlert(err)
             close()
@@ -104,6 +106,7 @@ export const useFollowup=()=>{
         detail,
         jobs,
         solve,
+        job_type,
         pics,
         files,
         getDetail,
