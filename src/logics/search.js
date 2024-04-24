@@ -1,5 +1,5 @@
 import {api,start,close,errAlert} from '@/helpers'
-import { ref,watch} from 'vue'
+import { ref,watch,onMounted} from 'vue'
 import _ from 'lodash'
 import { useAuthStore } from '@/store';
 import { useRouter,useRoute } from 'vue-router';
@@ -18,11 +18,13 @@ export const useSearch=()=>{
     const job_type=ref('');
     const doSearch = async (key='') => {
         if(key.length<1){
-          jobs.value.length=0
-          page.value=1
-          total.value=0
-          return 
-        } 
+          // jobs.value.length=0
+          // page.value=1
+          // total.value=0
+          // return 
+          key='searchAll'
+        }
+        
         start()
         try{
           let rs = await api.get(`callcenter/job/v1/getSearch/${store.userData.ses_user}/${key}`)
@@ -36,6 +38,9 @@ export const useSearch=()=>{
         close()
       }
       watch(() => search.value,_.debounce((val)=>doSearch(val),500))
+      onMounted(()=>{
+        doSearch('');
+      });
       const showDetail=(jobid)=>{
           router.push({path:`/search/${jobid}`,query:{search:search.value}})
       }
