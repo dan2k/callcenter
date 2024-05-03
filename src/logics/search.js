@@ -29,7 +29,7 @@ export const useSearch=()=>{
         try{
           let rs = await api.get(`callcenter/job/v1/getSearch/${store.userData.ses_user}/${key}`)
           jobs.value=rs.data.data  
-          page.value=0
+          page.value=1
           total.value=rs.data.total 
           isFinish.value=total.value<10?true:false
         }catch(err){
@@ -47,7 +47,8 @@ export const useSearch=()=>{
       const more=async ()=>{
         start()
         try{
-          let rs = await api.get(`callcenter/job/v1/getSearch/${store.userData.ses_user}/${search.value}/${page.value}`)
+          let searchtxt=search.value?search.value:'searchAll'
+          let rs = await api.get(`callcenter/job/v1/getSearch/${store.userData.ses_user}/${searchtxt}/${page.value}`)
           isFinish.value=rs.data.data.length<1?true:false 
           jobs.value=jobs.value.concat(rs.data.data)  
           page.value++;
