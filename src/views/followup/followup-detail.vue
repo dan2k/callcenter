@@ -41,9 +41,23 @@
                 <div class="row mx-2">
                     <div class="col-12">
                         <h6 class="card-title">รูปภาพ:</h6>
-                        <ul class="w-100">
-                            <li v-for="p in pics" ><div style="font-size:14px;">{{p.pic_name}}</div><div style="font-size:10px;line-height:10px;" class="my-0 py-0 text-secondary">{{ p.upd_datetime}}</div></li>
+                        <ul class="w-100" v-if="isPic===0">
+                            <li v-for="p in pics" >
+                                <div style="font-size:14px;">{{p.pic_name}}</div>
+                                <div style="font-size:10px;line-height:10px;" class="my-0 py-0 text-secondary">{{ p.upd_datetime}}</div>
+                            </li>
                         </ul>
+                        <div class="col-12 mx-auto" v-if="isPic===1">
+                            <viewer  
+                                :options="{navbar:pics.map((ob,i)=>`${JOBIMAGE}${ob.pic_name}`).length>1}"
+                                :images="pics.map((ob,i)=>`${JOBIMAGE}${ob.pic_name}`)"
+                                class="viewer text-center" 
+                            >
+                                 <template #default="scope">
+                                     <img v-for="src in scope.images" :src="src" :key="src" class="image">
+                                </template>
+                            </viewer>
+                        </div>
                         <Upload v-if="detail.job_status!=1" :size="300" :fileTypes="['image/*']" ref="uf">
                             <template #header="{ addImage }">
                                 <!-- <label for="" class="form-label"
@@ -92,13 +106,24 @@
  .sub-detail{
     font-size:14px;
  }
+ .image {
+  cursor: pointer;
+  margin: 5px;
+  display: inline-block;
+  width:100px;
+  height:100px;
+}
 </style>
 <script setup>
     import { useRoute } from 'vue-router';
     import { useFollowup } from '@/logics/followup';
     import { onMounted } from 'vue';
+    import 'viewerjs/dist/viewer.css'
+    import Viewer from "ice-vue-viewer/src/component.vue"
     const route=useRoute()
-    const {detail,getDetail,solve,job_type,pics,files,savePic,getPic}=useFollowup()
+    const {store,detail,getDetail,solve,job_type,pics,files,savePic,getPic}=useFollowup()
+    const isPic=Number(store.userData.ses_isPic)
+    const JOBIMAGE=import.meta.env.VITE_PRIVATE_JOBIMAGE;
     onMounted(async ()=>{
         await getDetail(route.params.jobid)
         console.log(detail)
