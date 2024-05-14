@@ -38,7 +38,7 @@
                     </div>
                     
                 </div>
-                <div class="row mx-2" v-if="isPic==='1'">
+                <div class="row mx-2" v-if="isPic==='1' && pics.lenght">
                     <div class="col-12">
                         <h6 class="card-title">รูปภาพ:</h6>
                         
