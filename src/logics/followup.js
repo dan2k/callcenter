@@ -109,6 +109,7 @@ export const useFollowup=()=>{
         job_type,
         pics,
         files,
+        store,
         getDetail,
         showDetail,
         getJobs,

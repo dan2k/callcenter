@@ -3,6 +3,7 @@ import { ref,watch,onMounted} from 'vue'
 import _ from 'lodash'
 import { useAuthStore } from '@/store';
 import { useRouter,useRoute } from 'vue-router';
+import { useFollowup } from './followup';
 
 export const useSearch=()=>{
     const router=useRouter()
@@ -16,6 +17,8 @@ export const useSearch=()=>{
     const detail=ref({}) 
     const solve=ref(null) 
     const job_type=ref('');
+    const pics=ref([]);
+    const {getPic} =useFollowup();
     const doSearch = async (key='') => {
         if(key.length<1){
           // jobs.value.length=0
@@ -69,6 +72,7 @@ export const useSearch=()=>{
             let jobid=route.params.jobid
             let rs=await api.get(`callcenter/job/v1/getJobDetail/${jobid}`)
             detail.value=rs.data.data[0]
+            pics.value=await getPic(jobid);
             if(detail.value.job_status==1){
               await getSolve(jobid)
             }
@@ -96,6 +100,8 @@ export const useSearch=()=>{
         detail,
         solve,
         job_type,
+        pics,
+        isPic:store.userData.ses_isPic,
         showDetail,
         more,
         checkQuery,

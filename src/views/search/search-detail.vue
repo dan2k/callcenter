@@ -38,6 +38,24 @@
                     </div>
                     
                 </div>
+                <div class="row mx-2" v-if="isPic==='1' && pics.length">
+                    <div class="col-12">
+                        <h6 class="card-title">รูปภาพ:</h6>
+                        
+                        <div class="col-12 mx-auto" >
+                            <viewer  
+                                :options="{navbar:pics.map((ob,i)=>`${JOBIMAGE}${ob.pic_name}`).length>1}"
+                                :images="pics.map((ob,i)=>`${JOBIMAGE}${ob.pic_name}`)"
+                                class="viewer text-center" 
+                            >
+                                 <template #default="scope">
+                                     <img v-for="src in scope.images" :src="src" :key="src" class="image">
+                                </template>
+                            </viewer>
+                        </div>
+                    </div>
+                    
+                </div>
                 <div v-if="detail.job_status==1" class="row mx-2">
                     <div class="col-12">
                         <h6 class="card-title">การแก้ไข:</h6>
@@ -63,11 +81,21 @@
  .sub-detail{
     font-size:14px;
  }
+ .image {
+  cursor: pointer;
+  margin: 5px;
+  display: inline-block;
+  width:100px;
+  height:100px;
+}
 </style>
 <script setup>
     import { useSearch} from "@/logics/search"
     import { onMounted } from 'vue';
-    const {detail,getDetail,solve,job_type} = useSearch()
+    import 'viewerjs/dist/viewer.css'
+    import Viewer from "ice-vue-viewer/src/component.vue"
+    const {detail,getDetail,solve,pics,job_type,isPic} = useSearch()
+    const JOBIMAGE=import.meta.env.VITE_PRIVATE_JOBIMAGE;
     onMounted(()=>{
         getDetail()
     })
