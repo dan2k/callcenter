@@ -88,7 +88,7 @@
                 </div>
                 <br/>
                 <button 
-                    v-if="detail.satisfy1<1 && detail.job_status==1 && solve.job_type=='SW'" 
+                    v-if="detail.satisfy1<1 && detail.job_status==1 && solve?.job_type=='SW'" 
                     @click="$router.replace({ path: `/followup/${$route.params.jobid}/satisfy` })"
                     class="btn btn-primary btn-sm"
                 >ประเมินความพึงพอใจ
@@ -122,7 +122,7 @@
     import Viewer from "ice-vue-viewer/src/component.vue"
     const route=useRoute()
     const {store,detail,getDetail,solve,job_type,pics,files,savePic,getPic}=useFollowup()
-    const isPic=Number(store.userData.ses_isPic)
+    const isPic=Number(store.userData?.ses_isPic)??0
     const JOBIMAGE=import.meta.env.VITE_PRIVATE_JOBIMAGE;
     onMounted(async ()=>{
         await getDetail(route.params.jobid)
