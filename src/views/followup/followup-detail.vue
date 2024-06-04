@@ -122,7 +122,7 @@
     import Viewer from "ice-vue-viewer/src/component.vue"
     const route=useRoute()
     const {store,detail,getDetail,solve,job_type,pics,files,savePic,getPic}=useFollowup()
-    const isPic=Number(store.userData.ses_isPic)
+    const isPic=Number(store.userData?.ses_isPic)??0
     const JOBIMAGE=import.meta.env.VITE_PRIVATE_JOBIMAGE;
     onMounted(async ()=>{
         await getDetail(route.params.jobid)
