@@ -21,9 +21,9 @@ export const useFollowup=()=>{
             detail.value=rs.data.data[0]
             pics.value=await getPic(jobid)
             close()
-            if(detail.value.job_status==1){
+            //if(detail.value.job_status==1){
                 await getSolve(jobid)
-            }
+            //}
         }catch(err){
             errAlert(err)
             close()

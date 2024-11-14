@@ -74,15 +74,21 @@
                     </div>
                     
                 </div>
-                <div v-if="detail.job_status==1" class="row mx-2">
+                <div v-if="detail.job_status==1 && job_type=='HW'" class="row mx-2">
                     <div class="col-12">
                         <h6 class="card-title">การแก้ไข:</h6>
-                        <pre v-if="job_type=='SW'" style="text-indent: 1.5em;" class="sub-detail">{{solve?.comment_desc}}</pre>
-                        <p v-if="job_type=='HW'" style="text-indent: 1.5em;" class="sub-detail">
+                        <p  style="text-indent: 1.5em;" class="sub-detail">
                             1.ทำการตรวจสอบ {{ solve.comment_desc.split('||')[0] }}<br>
                             2.ดำเนินการ {{ solve.comment_desc.split('||')[1] }}<br>
                             3.ทำการทดสอบ {{ solve.comment_desc.split('||')[2] }}<br>
                         </p>
+                    </div>
+                    
+                </div>
+                <div v-if="job_type=='SW'" class="row mx-2">
+                    <div class="col-12">
+                        <h6 class="card-title">การแก้ไข:</h6>
+                        <pre v-if="job_type=='SW'" style="text-indent: 1.5em;" class="sub-detail">{{solve?.comment_desc}}</pre>
                     </div>
                     
                 </div>
